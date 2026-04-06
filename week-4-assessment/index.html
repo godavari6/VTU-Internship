@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DevDash | Internship Project</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <div class="app-container">
+        <aside class="sidebar">
+            <div class="logo">Interactive Data Dashboard</div>
+            <button id="theme-toggle">🌓 Dark Mode</button>
+            <div class="sidebar-footer">
+            </div>
+        </aside>
+
+        <main class="content">
+            <header class="main-header">
+                <h1>Interactive Data Dashboard</h1>
+            </header>
+
+            <div class="dashboard-grid">
+                <section class="card">
+                    <h2>User Directory</h2>
+                    <button id="generate-user">Generate New User</button>
+                    <div id="user-loader" class="loader hidden"></div>
+                    <div id="user-container"></div>
+                </section>
+
+                <section class="card">
+                    <h2>Weather Search</h2>
+                    <div class="input-row">
+                        <input type="text" id="city-input" placeholder="London, Tokyo, Delhi...">
+                        <button id="search-weather">Search</button>
+                    </div>
+                    <div id="weather-result"></div>
+                </section>
+
+                <section class="card">
+                    <h2>Task Manager</h2>
+                    <div class="input-row">
+                        <input type="text" id="todo-input" placeholder="New task...">
+                        <button id="add-todo">Add</button>
+                    </div>
+                    <ul id="todo-list"></ul>
+                    <p class="hint"><small>Right-Click to Delete</small></p>
+                </section>
+
+                <section class="card">
+                    <h2>Inventory Search</h2>
+                    <input type="text" id="search-box" placeholder="Filter products...">
+                    <ul id="product-list"></ul>
+                </section>
+            </div>
+        </main>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
