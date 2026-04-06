@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Smart Student Utility</title>
+    <style>
+        :root { 
+            --primary: #4a90e2;
+            --bg: #f4f7f6;
+            --text: #333;
+         }
+        body.dark-mode { 
+            --primary: #357abd; 
+            --bg: #1a1a1a;
+            --text: #f0f0f0; 
+        }
+        body { 
+            font-family: sans-serif; 
+            background-color: var(--bg); 
+            color: var(--text);
+            padding: 20px;
+            transition: 0.3s; 
+        }
+        .container {
+             max-width: 800px;
+             margin: 0 auto; 
+             display: grid;
+             gap: 20px; }
+        .card { 
+            background: white;
+            padding: 20px; 
+            border-radius: 12px; 
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+         }
+        body.dark-mode .card { background: #2d2d2d; }
+        input {
+             width: 100%;
+             padding: 10px; 
+             margin: 10px 0; 
+             border: 1px solid #ccc;
+             border-radius: 5px; 
+             box-sizing: border-box;
+         }
+        button { 
+            background: var(--primary); 
+            color: white; 
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px; 
+            cursor: pointer;
+            transition: 0.2s;
+         }
+        button:hover { 
+            opacity: 0.9;
+            transform: scale(1.02);
+         }
+        .badge { 
+            display: inline-block;
+            padding: 5px 15px;
+            border-radius: 20px;
+            color: white; 
+            font-weight: bold; 
+        }
+        .result {
+             margin-top: 15px; 
+             font-weight: bold; 
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <button onclick="document.body.classList.toggle('dark-mode')">Toggle Mode Change to Dark/Light</button>
+    
+    <section class="card">
+        <h2>Login</h2>
+        <input type="text" id="user" placeholder="Username ">
+        <input type="password" id="pass" placeholder="Password">
+        <button onclick="checkLogin()">Login</button>
+        <p id="loginRes"></p>
+    </section>
+
+    <section class="card">
+        <h2>Grade Calculator</h2>
+        <input type="text" id="stuName" placeholder="Student Name">
+        <input type="number" id="m1" placeholder="Subject 1">
+        <input type="number" id="m2" placeholder="Subject 2">
+        <input type="number" id="m3" placeholder="Subject 3">
+        <input type="number" id="m4" placeholder="Subject 4">
+        <input type="number" id="m5" placeholder="Subject 5">
+        <button onclick="calculateGrades()">Calculate</button>
+        <div id="gradeRes"></div>
+    </section>
+
+    <section class="card">
+        <h2>Palindrome Checker</h2>
+        <input type="text" id="palInput" oninput="countChars()" placeholder="Enter a word">
+        <p>Chars: <span id="charCount">0</span></p>
+        <button onclick="checkPalindrome()">Check</button>
+        <p id="palRes"></p>
+    </section>
+
+    <section class="card">
+        <h2>Number Analyzer</h2>
+        <input type="number" id="numInput" placeholder="Enter a number">
+        <button onclick="analyzeNum()">Analyze</button>
+        <p id="numRes"></p>
+    </section>
+</div>
+
+<script>
+    
+    function checkLogin() {
+        let u = document.getElementById('user').value;
+        let p = document.getElementById('pass').value;
+        document.getElementById('loginRes').innerText = (u === 'admin' && p === '12345678') ? "Login Successful!" : "Invalid Credentials";
+    }
+
+
+    function calculateGrades() {
+        let name = document.getElementById('stuName').value;
+        let marks = [document.getElementById('m1'), document.getElementById('m2'), document.getElementById('m3'), document.getElementById('m4'), document.getElementById('m5')].map(i => Number(i.value));
+        let total = marks.reduce((a, b) => a + b, 0);
+        let avg = total / 5;
+        let grade = avg >= 90 ? 'A+' : avg >= 75 ? 'A' : avg >= 60 ? 'B' : avg >= 50 ? 'C' : 'Fail';
+        let color = grade === 'Fail' ? 'red' : 'green';
+        document.getElementById('gradeRes').innerHTML = `Name: ${name} <br> Total: ${total} <br> Avg: ${avg} <br> Grade: <span class="badge" style="background:${color}">${grade}</span>`;
+    }
+
+    
+    function countChars() { document.getElementById('charCount').innerText = document.getElementById('palInput').value.length; }
+    function checkPalindrome() {
+        let str = document.getElementById('palInput').value.toLowerCase();
+        let reversed = "";
+        for (let i = str.length - 1; i >= 0; i--) { reversed += str[i]; }
+        document.getElementById('palRes').innerText = (str === reversed && str !== "") ? "Palindrome" : "Not a Palindrome";
+    }
+
+
+    function analyzeNum() {
+        let n = parseInt(document.getElementById('numInput').value);
+        let parity = (n % 2 === 0) ? "Even" : "Odd";
+        let sign = (n > 0) ? "Positive" : (n < 0) ? "Negative" : "Zero";
+        let series = "";
+        for(let i=1; i<=n; i++) series += i + " ";
+        document.getElementById('numRes').innerHTML = `Type: ${parity}, Sign: ${sign} <br> Series: ${series}`;
+    }
+</script>
+</body>
+</html>
